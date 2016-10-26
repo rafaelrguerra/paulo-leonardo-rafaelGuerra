@@ -17,3 +17,4 @@ Usuário Visitante: Apenas observar
 [Mapa de Navegação:](mapaNavegação.jpg)
 
 Wireframe:
+Usuário Visitante: [Mapa de Navegação:](mapaNavegacao.jpg) Wireframe:
