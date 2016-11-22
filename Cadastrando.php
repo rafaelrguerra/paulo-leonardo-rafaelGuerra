@@ -4,17 +4,13 @@
 </head>
 <body>
 <?php
-	$host = "localhost";
-	$user = "root";
-	$pass = "";
-	$banco = "cadastroSite";
-	$conexao = mysql_connect($host,$user,$pass) or die(mysql_errno());
-	mysql_select_db($banco) or die(mysql_error());
+	include "conecta_mysql.php";
 	
 	$usuario=$_POST['usuario'];
 	$senha=$_POST['senha'];
 
-	$sql = mysql_query("INSERT INTO admin(usuario, senha) VALUES('$usuario', '$senha')");
+	$sql = "INSERT INTO admin(usuario, senha) VALUES('$usuario', '$senha')";
+	$resultado = mysqli_query($conexao,$sql) or die ("Não foi possível executar a SQL: ".mysqli_error());
 ?>
 	<script>
 		setTimeout("window.location='Login.php'", 2000);	

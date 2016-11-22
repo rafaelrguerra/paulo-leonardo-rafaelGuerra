@@ -5,18 +5,15 @@
 </head>
 <body>
 <?php
-	$host = "localhost";
-	$user = "root";
-	$pass = "";
-	$banco = "cadastroSite";
-	$conexao = mysql_connect($host,$user,$pass) or die(mysql_errno());
-	mysql_select_db($banco) or die(mysql_error());
+	include "conecta_mysql.php";
 	
 	$nome=$_POST['nome'];
 	$email=$_POST['email'];
 	$comentario=$_POST['comentario'];
 
-	$sql = mysql_query("INSERT INTO contato(nome, email, comentario) VALUES('$nome', '$email', '$comentario')");
+	$sql = "INSERT INTO contato(nome, email, comentario) VALUES('$nome', '$email', '$comentario')";
+	$resultado = mysqli_query($conexao,$sql) or die ("Não foi possível executar a SQL: ".mysqli_error());
+	mysqli_close($conexao);
 ?>
 	<script>
 		setTimeout("window.location='Contato.php'", 2000);

@@ -1,12 +1,3 @@
-<?php
-	$host = "localhost";
-	$user = "root";
-	$pass = "";
-	$banco = "cadastroSite";
-	$conexao = mysql_connect($host,$user,$pass,$banco) or die(mysql_errno());
-	mysql_select_db($banco) or die(mysql_error());
-?>
-
 <html>
 	<head>
 		<title>Atenticando usuario</title>
@@ -21,10 +12,14 @@
 	</head>
 	<body>
 		<?php
+		
+			include "conecta_mysql.php";
 			$usuario=$_POST['usuario'];
 			$senha=$_POST['senha'];
-			$sql = mysql_query("SELECT * FROM admin WHERE usuario = '$usuario' and senha = '$senha'") or die (mysql_error());
-			$row = mysql_num_rows($sql);
+			
+			$sql = "SELECT * FROM admin WHERE usuario = '$usuario' and senha = '$senha'";
+			$resultado = mysqli_query($conexao,$sql) or die ("Não foi possível executar a SQL: ".mysqli_error());
+			$row = mysqli_num_rows($resultado);
 			if($row > 0 and $senha != "" and $usuario != ""){
 				session_start();
 				$_SESSION['usuario']= $_POST['usuario'];
@@ -35,6 +30,7 @@
 				echo "Nome de usuário ou senha inválidos! Redirecionando...";
 				echo "<script>loginfailed()</script>";
 			}
+			mysqli_close($conexao);
 		?>
 	</body>
 </html>

@@ -1,14 +1,10 @@
 <?php
-	$host = "localhost";
-	$user = "root";
-	$pass = "";
-	$banco = "cadastroSite";
-	$conexao = mysql_connect($host,$user,$pass,$banco) or die(mysql_errno());
-	mysql_select_db($banco) or die(mysql_error());
+	include "conecta_mysql.php";
 	
 	$email=$_POST['email'];
-	$sql = mysql_query("DELETE FROM contato WHERE email='$email'");
-	
+	$sql = "DELETE FROM contato WHERE email='$email'";
+	$resultado = mysqli_query($conexao,$sql) or die ("Não foi possível executar a SQL: ".mysqli_error());
+	mysqli_close($conexao);
 ?>
 <script>
 	setTimeout("window.location='Administrador.php'", 0);
